@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter, Route, Routes} from "react-router-dom"
 import Home from "./components/home/Home"
-import LeaderBoard from "./components/leaderboard/Leaderboard"
 import Profile from "./components/profile/Profile"
-import Store from "./components/store/Store"
 import Login from "./components/login/Login"
 import Conversation from './components/home/Conversation';
 import Register from './components/login/Register'
@@ -23,9 +21,7 @@ ReactDOM.render(
         <Route path="Login" element={<Home />}/>
         <Route path="Register" element={<Home />}/>
         <Route path="/Messages/:ConvoId" element={<Conversation />} />
-        <Route path="Leaderboard" element={<LeaderBoard />} />
         <Route path="Profile" element={<Profile />} />
-        <Route path="Store" element={<Store />} />
       </Route>
     </Routes>
   </BrowserRouter>,

@@ -36,7 +36,7 @@ const Home = () => {
 
         {/* Header*/}
         <div className=" mx-5 flex justify-between border-b-2">
-          <h1 className="pb-2 text-3xl ">Messages</h1>
+          <h1 className="pb-2 text-3xl ">Direct Messages</h1>
           {/*New Message Icon */}
           <div
             className="group h-10 w-16 items-center rounded-lg bg-blockGold hover:cursor-pointer hover:bg-blockLightGold"

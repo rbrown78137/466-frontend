@@ -1,18 +1,9 @@
 import React, { useEffect } from "react";
-import BlocksCard from "./BlocksCard";
 import SettingsModal from "./SettingsModal";
 import AvatarsModal from "./AvatarsModal";
 import { useState } from "react";
-import createCard from "../store/CardInfo";
 import DataFunctions from "../../DataFunctions";
 import createAvatar from "./AvatarInfo";
-
-//will be filled with call from backend hopefully
-let testTrophyData = [
-  createCard("pig"),
-  createCard("zebra"),
-  createCard("basic city"),
-];
 
 const Profile = () => {
   //provide sample user data so we know what it's supposed to look like
@@ -51,22 +42,6 @@ const Profile = () => {
       setTrophyData(await DataFunctions.getTrophies());
     }
   }, []);
-
-  //turn trophy ids to names
-  let trophyNames = [];
-  if (trophyIDs.length > 0) {
-    for (let index = 0; index < trophyIDs.length; index++) {
-      trophyNames.push(DataFunctions.blockIDToName(trophyIDs[index]));
-    }
-    console.log("Trophy names: " + trophyNames);
-  }
-  //turn names into cards
-  let actualTrophyData = [];
-  if (trophyNames.length > 0) {
-    for (let index = 0; index < trophyNames.length; index++) {
-      actualTrophyData.push(createCard(trophyNames[index]));
-    }
-  }
 
   //get current avatar img
   let currentImgName = DataFunctions.avatarIDToName(currentUser.avatarId);
@@ -190,19 +165,6 @@ const Profile = () => {
         </div>
 
         {/*End Header*/}
-      </div>
-
-      {/*Header for trophies section*/}
-      <div className="ml-0 pb-1 text-center text-5xl md:ml-10 md:text-left">
-        Your blocks
-      </div>
-
-      {/* use trophyData to fill in blocks */}
-      <div className="flex flex-wrap justify-center pl-1">
-        {actualTrophyData.map((i) => (
-          //Map each trophyData into a blocksCard for formatting purposes
-          <BlocksCard blockImg={i.img} blockName={i.name} />
-        ))}
       </div>
     </div>
   );

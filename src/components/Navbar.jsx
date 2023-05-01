@@ -35,61 +35,6 @@ const Navbar = ({logout}) => {
           </svg>
           <p className="hidden md:block">Home</p>
         </NavLink>
-
-        {/*Styling for the icon in the store button and navigation for where it goes  */}
-        <NavLink
-          to="/Store"
-          className={({ isActive }) =>
-            isActive
-              ? ` bg-blockGold ${buttons}`
-              : `bg-blockBlue hover:bg-blockSky ${buttons}`
-          }
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
-          <p className="hidden md:block"> Store</p>
-        
-          <title>Store</title>
-        </NavLink>
-
-        {/*Styling for the icon in the leaderboard button and navigation for where it goes  */}
-        <NavLink
-          to="/Leaderboard"
-          className={({ isActive }) =>
-            isActive
-              ? ` bg-blockGold ${buttons}`
-              : `bg-blockBlue hover:bg-blockSky ${buttons}`
-          }
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-            />
-          </svg>
-          <p className="hidden md:block">LeaderBoard</p>
-          <title>LeaderBoard</title>
-        </NavLink>
         
         {/*Styling for the icon in the profile button and navigation for where it goes  */}
         <NavLink

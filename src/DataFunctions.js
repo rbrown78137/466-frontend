@@ -6,8 +6,16 @@ export class DataFunctions {
   //calls the backend to get user information based on userID
   static async setUser(userId) {
     try {
-      const response = await fetch(`${this.url}/api/User/${userId}`);
-      const userObj = await response.json();
+      //const response = await fetch(`${this.url}/api/User/${userId}`);
+      const userObj = {
+        id: 1,
+        name: "Test User",
+        password: "12345678",
+        email: "test@gmail.com",
+        avatarId: 0,
+        privacySetting: 0,
+        lastLoginTime: "2022-03-02T20:57:01.805Z",
+      };
       if (userObj.id) {
         this.user = userObj;
       }
@@ -19,8 +27,16 @@ export class DataFunctions {
   //use username and password to call to backend and set user object
   static async loginUser(username, password) {
     try {
-      const response = await fetch(`${this.url}/login/${username}/${password}`);
-      const userObj = await response.json();
+      //const response = await fetch(`${this.url}/login/${username}/${password}`);
+      const userObj = {
+        id: 1,
+        name: "Test User",
+        password: "12345678",
+        email: "test@gmail.com",
+        avatarId: 0,
+        privacySetting: 0,
+        lastLoginTime: "2022-03-02T20:57:01.805Z",
+      };
       console.log(userObj.id);
       if (userObj.id) {
         localStorage.setItem("user", userObj.id);
@@ -455,41 +471,6 @@ export class DataFunctions {
     return privacyInt;
   }
 
-  //Store Functions
-
-  //update bought list based off of block's name
-  static async purchaseBlock(blockName, purchaseAmount) {
-    //convert blockName to ID
-    let blockID = this.blockNameToID(blockName);
-
-    //call backend
-    try {
-      const response = await fetch(
-        `${this.url}/api/Purchase/${this.user.id}/${blockID}/${purchaseAmount}`
-      );
-      const data = await response.json();
-      if (data) {
-        console.log(data);
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  }
-
-  //returns the most popular items in the store
-  static async getMostPopular() {
-    try {
-      const response = await fetch(`${this.url}/getTopPurchases`);
-      const data = await response.json();
-      if (data) {
-        return data;
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-    return;
-  }
-
   //Profile functions
 
   //updates the backend with the user's new avatar
@@ -629,22 +610,6 @@ export class DataFunctions {
     try {
       const response = await fetch(
         `${this.url}/api/User/usernameExists/${otherUsername}`
-      );
-      const data = await response.json();
-      if (data) {
-        return data;
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-    return;
-  }
-
-  //returns the highest ranked users
-  static async getLeaderboard() {
-    try {
-      const response = await fetch(
-        `${this.url}/getLeaderboard/${this.user.id}`
       );
       const data = await response.json();
       if (data) {

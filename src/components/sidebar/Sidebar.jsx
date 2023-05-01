@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { Outlet, useLocation } from 'react-router-dom'
 import { DataFunctions } from '../../DataFunctions'
-import MostPopular from './MostPopular'
-import PointsBlock from './PointsBlock'
-import SideProfile from './SideProfile'
+import NewGlobalMessageModal from "./NewGlobalMessageModal";
 
 
 /**
@@ -11,6 +9,11 @@ import SideProfile from './SideProfile'
  * @returns 
  */
 const Sidebar = () => {
+
+  const [messageModalOn, setMessageModalOn] = useState(false);
+  const newMessageClicked = () => {
+    setMessageModalOn(true);
+  };
   
   
 
@@ -46,34 +49,51 @@ const Sidebar = () => {
 
 
 
-  let location = useLocation()
-
-  /**
-   * Function to generate sidebar content pased on where the user is in the application
-   * @param {*} location the current location in the URL of the application
-   * @returns Array of elements to be included in the sidebar
-   */
-  const content = (location) => {
-    let content;
-
-    /* STORE generates a profile block and most popular, PROFILE generates blocks for how many points a user has, other tabs only generate profile block*/
-    if (location.pathname === "/Store"){
-      content = [<SideProfile user = {sideUser} key={10}/>, <MostPopular key={20}/>]
-    } else if (location.pathname === "/Profile"){
-      content = [<PointsBlock type="total points" points = {sideUser.totalPoints} key={11}/>, <PointsBlock type="spendable points" points = {sideUser.spendablePoints} key={21}/>,<PointsBlock type="giftable points" points = {sideUser.giftablePoints} key={31}/>]
-    } else{
-      content = [<SideProfile user = {sideUser} key={13}/>]
-    }
-    return content
-  }
-
   
   /* returns the general sidebar block with a function call content() to get the array of content that will fill the sidebar*/ 
   return (
     <div className="w-2/6 h-screen bg-blockNavy md:p-10 p-3 flex flex-col absolute right-0 top-0 overflow-y-auto gap-10">
-      {content(location)}
+    <>
+      {/*Main Div*/}
+      <div className="flex h-screen flex-col pt-5">
+        <div>
+          {/*Only created when settingModalON == true (when the cog is clicked) */}
+          {messageModalOn && (
+            <NewGlobalMessageModal setSettingOn={setMessageModalOn} />
+          )}
+        </div>
+
+        {/* Header*/}
+        <div className=" mx-5 flex justify-between border-b-2">
+          <h1 className="pb-2 text-3xl ">Global Messages</h1>
+          {/*New Message Icon */}
+          <div
+            className="group h-10 w-16 items-center rounded-lg bg-blockGold hover:cursor-pointer hover:bg-blockLightGold"
+            onClick={newMessageClicked}
+          >
+            <title>Create New Message Button</title>{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className=" h-10 w-10 translate-x-3 stroke-blockOrange group-hover:stroke-blockGold"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              />
+            </svg>
+          </div>
+        </div>
+        {/* End Header*/}
+        {/* Messages List*/}
+        </div>
+    </>
     </div>
-  )
-}
+  );
+};
 
 export default Sidebar
