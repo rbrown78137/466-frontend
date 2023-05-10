@@ -19,7 +19,7 @@ function App(props) {
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [errorMessage, setErrorMessage] = React.useState(false);
-    const [user, setUser] = React.useState(localStorage.getItem("user"))
+    const [user, setUser] = React.useState(DataFunctions.setUser());
     const [registerView, setRegisterView] = React.useState(false)
     let navigate = useNavigate();
     let location = useLocation();
@@ -45,7 +45,6 @@ function App(props) {
       if(!DataFunctions.getUser()){
         await DataFunctions.setUser(user);
       }
-      console.log(DataFunctions.user)
     },[user]);
 
 
@@ -56,10 +55,10 @@ function App(props) {
   <div className = {`flex flex-row ${user ? '' : 'hidden'}`}>
     {/*((location.pathname === "/Register" ) ? <Navigate to="/" state={{ from: location }} replace />: <></>)*/}
     <Navbar logout={logout}/>
-    <div className="container w-3/6">
+    <div className="container">
       <Outlet />
     </div>
-    <Sidebar />
+    {/* <Sidebar /> */}
   </div>
   {!user && <div>
     {registerView ? (<><Register handleHaveAccount={goToLogin}/></>) : (<><Login handleNeedAccount={goToRegister} errorMessage={errorMessage} setUser={setUser}/></>) }

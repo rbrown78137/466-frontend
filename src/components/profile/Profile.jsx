@@ -1,27 +1,68 @@
 import React, { useEffect } from "react";
-import SettingsModal from "./SettingsModal";
 import AvatarsModal from "./AvatarsModal";
 import { useState } from "react";
 import DataFunctions from "../../DataFunctions";
 import createAvatar from "./AvatarInfo";
 
 const Profile = () => {
-  //provide sample user data so we know what it's supposed to look like
-  let exampleUser = {
-    id: 0,
-    name: "",
-    password: "",
-    email: "",
-    avatarId: 0,
-    privacySetting: 0,
-    spendablePoints: 0,
-    giftablePoints: 0,
-    totalPoints: 0,
-    lastLoginTime: "2022-03-02T20:57:01.805Z",
-  };
+
+  const adjList = [
+    'Attractive',
+    'Bald',
+    'Beautiful',
+    'Chubby',
+    'Clean',
+    'Dazzling',
+    'Drab',
+    'Elegant',
+    'Fancy',
+    'Fit',
+    'Flabby',
+    'Glamorous',
+    'Gorgeous',
+    'Handsome',
+    'Long',
+    'Magnificent',
+    'Muscular',
+    'Plain',
+    'Plump',
+    'Quaint',
+    'Scruffy',
+    'Shapely',
+    'Short',
+    'Skinny',
+    'Stocky',
+  ];
+
+  const nounList = [
+    'Tiger', 'Elephant', 'Giraffe', 'Lion', 'Gorilla', 'Polar Bear', 'Chimpanzee', 'Penguin', 'Kangaroo', 'Dolphin', 'Zebra', 'Crocodile', 'Koala', 'Platypus', 'Bald Eagle', 'Octopus', 'Whale', 'Cheetah', 'Orangutan', 'Panda'
+  ];
+
+
 
   //get user data
-  const [currentUser, setCurrentUser] = React.useState(exampleUser);
+  const [currentUser, setCurrentUser] = React.useState(DataFunctions.getUser());
+
+  var [adj, setAdj] = React.useState(currentUser.name.split(" ")[0]);
+  var [noun, setNoun] = React.useState(currentUser.name.split(" ")[1]);
+
+  let resetName = (adj, noun) => {
+    let newName = adj + " " + noun;
+    currentUser.name = newName;
+    DataFunctions.updateName(newName);
+  }
+
+  let pickNoun = () => {
+    let newNoun = nounList[Math.floor(Math.random() * nounList.length)];
+    setNoun(newNoun);
+    resetName(adj, newNoun);
+  }
+
+  let pickAdj = () => {
+    let newAdj = adjList[Math.floor(Math.random() * adjList.length)];
+    setAdj(newAdj);
+    resetName(newAdj, noun);
+  }
 
   //call backend to populate with current user's data
   useEffect(async () => {
@@ -29,43 +70,17 @@ const Profile = () => {
       setCurrentUser(await DataFunctions.getUser());
     }
   }, []);
-
-  //provide sample trophy data so we know what it's supposed to look like
-  let exampleTrophy = [7, 8, 9];
-
-  //trophy data
-  const [trophyIDs, setTrophyData] = React.useState(exampleTrophy);
-
-  //call backend to populate trophyData
-  useEffect(async () => {
-    if (DataFunctions.getUser()) {
-      setTrophyData(await DataFunctions.getTrophies());
-    }
-  }, []);
-
   //get current avatar img
   let currentImgName = DataFunctions.avatarIDToName(currentUser.avatarId);
 
   //turn into an img object
   let currentImgObj = createAvatar(currentImgName);
 
-  //get current privacy settings
-  let privacySettings = DataFunctions.interpretPrivacySetting(
-    currentUser.privacySetting
-  );
-
   //Used for modal pop-ups
 
   //Variables used for pop-ups
-  //Settings
-  const [settingModalOn, setSettingModalOn] = useState(false);
   // Choose an avatar
   const [avatarModalOn, setAvatarModalOn] = useState(false);
-
-  //onClick event for toggling settings modal
-  const settingsClicked = () => {
-    setSettingModalOn(true);
-  };
 
   //onClick event for toggling avatar modal
   const editClicked = () => {
@@ -77,15 +92,6 @@ const Profile = () => {
     <div className="h-screen overflow-auto">
       {/*Pop-ups*/}
       <div>
-        {/*Only created when settingModalON == true (when the cog is clicked) */}
-        {settingModalOn && (
-          <SettingsModal
-            setSettingOn={setSettingModalOn}
-            /*Expected inputs include current privacy settings */
-            currentBlocksArePublic={privacySettings.publicCanSeePurchases}
-            currentPointsArePublic={privacySettings.publicCanSeePoints}
-          />
-        )}
         {/*Avatar pop-up*/}
         {avatarModalOn && (
           <AvatarsModal
@@ -136,36 +142,31 @@ const Profile = () => {
           <h1>{currentUser.name}</h1>
         </div>
 
-        {/*Settings icon:*/}
-        <div
-          className="absolute top-10 right-10 hover:cursor-pointer"
-          /* Create modal when clicked */
-          onClick={settingsClicked}
-        >
-          <title>Change Settings Button</title>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-9 w-9 stroke-blockGold hover:stroke-blockLightGold"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-        </div>
-
         {/*End Header*/}
       </div>
+
+      {/*Body*/}
+      <div className="flex flex-col items-center justify-between">
+        <h1 className="text-3xl font-bold">Edit Name</h1>
+        <div className="flex">
+          <div className="flex-2 flex flex-col items-center justify-center mx-16 text-center">
+            <h3 className="text-xl font-bold">Generate Adjective</h3>
+            <h4 className="text-lg font-bold">{adj}</h4>
+            <button className="bg-blockGold text-white rounded-lg px-4 py-2 m-2 hover:bg-blockLightGold" onClick={pickAdj}>
+              Generate
+            </button>
+          </div>
+          <div className="flex-2 flex flex-col items-center justify-center mx-16 text-center">
+            <h3 className="text-xl font-bold">Generate Noun</h3>
+            <h4 className="text-lg font-bold">{noun}</h4>
+            <button className="bg-blockGold text-white rounded-lg px-4 py-2 m-2 hover:bg-blockLightGold" onClick={pickNoun}>
+              Generate
+            </button>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   );
 };

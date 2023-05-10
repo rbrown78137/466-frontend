@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Outlet, useLocation } from 'react-router-dom'
 import { DataFunctions } from '../../DataFunctions'
 import NewGlobalMessageModal from "./NewGlobalMessageModal";
+import GlobalMessageBlock from "./GlobalMessageBlock";
 
 
 /**
@@ -28,7 +29,7 @@ const Sidebar = () => {
         "spendablePoints": 0,
         "giftablePoints": 0,
         "totalPoints": 0,
-        "lastLoginTime": "2022-03-02T20:57:01.805Z"
+        "lastLoginTime": "2023-03-02T20:57:01.805Z"
       }
 
   const [sideUser, setSideUser] = React.useState(exampleUser)
@@ -90,6 +91,8 @@ const Sidebar = () => {
         </div>
         {/* End Header*/}
         {/* Messages List*/}
+        <GlobalMessageBlock username={"antelope35"} message={"My classes are putting me in the dumps today"}image = {1}/>
+        <GlobalMessageBlock username={"rhino12"} message={"Today is going to be a great day, you got this!!"}image = {4}/>
         </div>
     </>
     </div>
