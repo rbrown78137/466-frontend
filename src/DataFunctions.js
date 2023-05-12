@@ -1,21 +1,13 @@
 export class DataFunctions {
   static user;
-  static url = "https://sewebappryanbrown.azurewebsites.net";
+  static url = "https://466app.azurewebsites.net";
   static mostPopular;
 
   //calls the backend to get user information based on userID
   static async setUser(userId) {
     try {
-      //const response = await fetch(`${this.url}/api/User/${userId}`);
-      const userObj = {
-        id: 1,
-        name: "Test User",
-        password: "12345678",
-        email: "test@gmail.com",
-        avatarId: 0,
-        privacySetting: 0,
-        lastLoginTime: "2023-03-02T20:57:01.805Z",
-      };
+      const response = await fetch(`${this.url}/api/User/${userId}`);
+      const userObj = await response.json();
       if (userObj.id) {
         this.user = userObj;
       }
@@ -27,16 +19,8 @@ export class DataFunctions {
   //use username and password to call to backend and set user object
   static async loginUser(username, password) {
     try {
-      //const response = await fetch(`${this.url}/login/${username}/${password}`);
-      const userObj = {
-        id: 1,
-        name: "Test User",
-        password: "12345678",
-        email: "test@gmail.com",
-        avatarId: 0,
-        privacySetting: 0,
-        lastLoginTime: "2023-03-02T20:57:01.805Z",
-      };
+      const response = await fetch(`${this.url}/login/${username}/${password}`);
+      const userObj = await response.json();
       console.log(userObj.id);
       if (userObj.id) {
         localStorage.setItem("user", userObj.id);
@@ -229,17 +213,17 @@ export class DataFunctions {
   //get list of all users currentUser has messaged
   static async getMessageList(userId) {
     try {
-      // const response = await fetch(
-      //   `${this.url}/api/Message/usersMessages/${this.user.id}`
-      // );
-      // const data = await response.json();
+      const response = await fetch(
+        `${this.url}/api/Message/usersMessages/${this.user.id}`
+      );
+      const data = await response.json();
 
-     const data = [
-        {username: "test1", lastMessage: "hello", avatarId: 0, id: 1},
-        {username: "test2", lastMessage: "hello", avatarId: 1, id: 2},
-        {username: "test3", lastMessage: "hello", avatarId: 2, id: 3},
-        {username: "test4", lastMessage: "hello", avatarId: 3, id: 4},
-      ]
+    //  const data = [
+    //     {username: "test1", lastMessage: "hello", avatarId: 0, id: 1},
+    //     {username: "test2", lastMessage: "hello", avatarId: 1, id: 2},
+    //     {username: "test3", lastMessage: "hello", avatarId: 2, id: 3},
+    //     {username: "test4", lastMessage: "hello", avatarId: 3, id: 4},
+    //   ]
       if (data) {
         return data;
       }

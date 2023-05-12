@@ -6,28 +6,7 @@ import GlobalMessageBlock from "./GlobalMessageBlock";
 
 const GlobalMessageBoard = () => {
 
-    let messagesMock = [
-        {
-            username: "John Doe",
-            message: "Hello World!",
-            avatarId: 1,
-            key: 1,
-        },
-        {
-            username: "Jane Doe",
-            message: "Hello World!",
-            avatarId: 2,
-            key: 2,
-        },
-        {
-            username: "John Doe",
-            message: "Hello World!",
-            avatarId: 3,
-            key: 3,
-        },
-    ];
-
-    const [allMessages, setAllMessages] = useState(messagesMock);
+    const [allMessages, setAllMessages] = useState(DataFunctions.getGlobalMessages());
 
     const [globalMessageModalOn, setGlobalMessageModalOn] = useState(false);
     const newMessageClicked = () => {

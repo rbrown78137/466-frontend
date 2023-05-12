@@ -1,15 +1,12 @@
 # Getting Started with Create React App
 
 ## How to run our code: 
-1. Clone the block-frontend code into Visual Studio Code
-  * https://github.com/RAIK284/466-frontend 
-  * click the green button on the top left that says "Code" 
-  * Clone, open in github desktop, or open it in Visual Studio Code in the way you usually do. 
-2. Open a new terminal in VS Code and run the following instructions 
+1. Once unzipped, open the folder in terminal
+2. Run the following commands:
   * npm install npm 
   * npm run start 
-3. If a pop up appears asking for access to the browser, allow! 
+3. Navigate to http://localhost:3000/ in your browser
+4. If a pop up appears asking for access to the browser, allow! 
 4. You should be seeing the Register page after a couple of seconds. Be patient with the first time running it. 
 5. After you enter your register information, you should be redirected to Log In with the username/password you just submitted. 
-6. Enjoy ABABI! 
-7. If you have any questions, message ABABI help ababiofficial2023@gmail.com
+6. Enjoy ABABI!
