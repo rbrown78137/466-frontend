@@ -198,6 +198,8 @@ export class DataFunctions {
     //change avatar name to id
     let avatarID = this.avatarNameToID(avatarName);
 
+    currentUser.avatarId = avatarID;
+
     //call backend to update Avatar ID
     //still a lil confused how to use post
 
