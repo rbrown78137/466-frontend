@@ -24,7 +24,7 @@ ReactDOM.render(
         <Route path="Board" element={<GlobalMessageBoard />}/>
         <Route path="Login" element={<Home />}/>
         <Route path="Register" element={<Home />}/>
-        <Route path="/Messages/:ConvoId" element={<Conversation />} />
+        <Route path="/Messages/:ConvoId/:name" element={<Conversation />} />
         <Route path="Profile" element={<Profile />} />
       </Route>
     </Routes>

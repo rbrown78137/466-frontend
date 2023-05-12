@@ -7,17 +7,17 @@ import DataFunctions from "../../DataFunctions";
 import createAvatar from "../profile/AvatarInfo"
 
 
-let testMessages = [
-  {content: "Hello this Is Dope",
-  senderId : true,
-  key: 1},
-  {content: "I Know Right",
-  senderId : false,
-  key: 2},
-  {content: "Thanks for all your work today!",
-  senderId : true,
-  key: 3},
-]
+// let testMessages = [
+//   {content: "Hello this Is Dope",
+//   senderId : true,
+//   key: 1},
+//   {content: "I Know Right",
+//   senderId : false,
+//   key: 2},
+//   {content: "Thanks for all your work today!",
+//   senderId : true,
+//   key: 3},
+// ]
 
 /**
  * A Conversation is the messages between two individual users
@@ -25,7 +25,7 @@ let testMessages = [
  */
 const Conversation = () => {
   let params = useParams();
-
+  const [ displayName, setDisplayName ] = useState("")
   const [ emojiView, setEmojiView ] = useState('hidden')
   const [ convo, setConvo ] = useState([])
 
@@ -42,10 +42,7 @@ const Conversation = () => {
 
   //Gets the conversation between to users
   useEffect(async() => {
-    if(DataFunctions.getUser()){
       setConvo(await DataFunctions.getConversation(params.ConvoId))
-      //setConvo(testMessages)
-    }
   });
 
 
@@ -61,7 +58,7 @@ const Conversation = () => {
       </Link>
 
       {/*Name and divider*/}
-      <div className=' self-center text-2xl pt-2'>{params.ConvoId}</div>
+      <div className=' self-center text-2xl pt-2'>{params.name}</div>
       <div className=' bg-slate-100 border-b mx-5 mt-2' ></div>
 
       {/*The Javascript in this portion maps through the messages and creates a message block (like iOS) for each message in an array*/}

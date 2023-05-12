@@ -10,7 +10,7 @@ import createAvatar from '../profile/AvatarInfo';
  * 
  * @returns 
  */
-const MessageBlock = ({username,firstMessage,read,image}) => {
+const MessageBlock = ({username,name,firstMessage,read,image}) => {
 
   const handleChangeRead=()=>{
      read = true;
@@ -25,7 +25,7 @@ const MessageBlock = ({username,firstMessage,read,image}) => {
   return (
     
     <div className='bg-blockBlue rounded-2xl mx-2 mt-4 relative cursor-pointer hover:opacity-80' >
-      <Link to={`/Messages/${username}`} key={username} onClick={handleChangeRead}>
+      <Link to={`/Messages/${username}/${name}`} key={username} onClick={handleChangeRead}>
 
       {/* Notification Tab, Conditional property in className sets if it is visible or not*/}
       <span className={`absolute top-0 Left-0 w-5 h-5 transform -translate-x-1/4 -translate-y-1/4 bg-blockOrange rounded-full ${read == true ? '' : 'hidden'}`}></span>
@@ -36,7 +36,7 @@ const MessageBlock = ({username,firstMessage,read,image}) => {
         
         {/* For name and actual Message Content*/}
         <div className='pl-5 self-center text-ellipsis truncate'>
-          <h1 className='text-xl'>{username}</h1>
+          <h1 className='text-xl'>{name}</h1>
           <p className=' text-neutral-800 '>{firstMessage}</p>
         </div>
       </div>

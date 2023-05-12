@@ -11,7 +11,7 @@ const Home = () => {
   //onClick event for toggling modal
   const newMessageClicked = async () => {
     const newChatUser = await DataFunctions.getRandomUser()
-    navigate(`../Messages/${newChatUser.username}`, { replace: true });
+    navigate(`../Messages/${newChatUser.username}/${newChatUser.name}`, { replace: true });
   };
 
   //Backend call to get All Messages for a user
@@ -57,6 +57,7 @@ const Home = () => {
           {messageList.map((i) => (
             <MessageBlock
               username={i.username}
+              name={i.name}
               firstMessage={""}
               read={false}
               key={i.id}
