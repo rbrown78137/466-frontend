@@ -1,6 +1,7 @@
 export class DataFunctions {
   static user;
-  static url = "https://466app.azurewebsites.net";
+  //static url = "https://466app.azurewebsites.net";
+  static url = "https://localhost:7207";
   static mostPopular;
 
   //calls the backend to get user information based on userID
@@ -49,8 +50,9 @@ export class DataFunctions {
   //Creates a new user based on the new information
   static async registerUser(username, password, email) {
     try {
+      var random_name = "Curious Tiger"
       const response = await fetch(
-        `${this.url}/register/${username}/${password}/${email}/${username}`
+        `${this.url}/register/${username}/${password}/${email}/${random_name}`
       );
       const userObj = await response.json();
       console.log(userObj.id);

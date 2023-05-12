@@ -19,7 +19,7 @@ function App(props) {
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [errorMessage, setErrorMessage] = React.useState(false);
-    const [user, setUser] = React.useState(DataFunctions.setUser());
+    const [user, setUser] = React.useState(localStorage.getItem("user"));
     const [registerView, setRegisterView] = React.useState(false)
     let navigate = useNavigate();
     let location = useLocation();
