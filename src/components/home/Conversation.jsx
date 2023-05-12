@@ -28,7 +28,7 @@ const Conversation = () => {
   const [ displayName, setDisplayName ] = useState("")
   const [ emojiView, setEmojiView ] = useState('hidden')
   const [ convo, setConvo ] = useState([])
-
+  const [avatar, setAvatar] = useState({})
   const handleEmojiButton=()=>{
     emojiView === '' ? setEmojiView('hidden') : setEmojiView('')
   }
@@ -38,17 +38,17 @@ const Conversation = () => {
   }
 
   //let avatarName = DataFunctions.avatarIDToName(profilePic);
-  let avatarObj = createAvatar(DataFunctions.avatarIDToName(0));
 
   //Gets the conversation between to users
   useEffect(async() => {
-      setConvo(await DataFunctions.getConversation(params.ConvoId))
+      setConvo(await DataFunctions.getConversation(params.ConvoId));
+      setAvatar(createAvatar(DataFunctions.avatarIDToName(parseInt(params.ConvoImageId))))
   });
 
 
   return (
     <div className='flex flex-col relative pt-5 h-screen ' >
-      <img src={avatarObj.img} alt={avatarObj.name} className='h-20 w-20 rounded-full self-center' />
+      <img src={avatar.img} alt={avatar.name} className='h-20 w-20 rounded-full self-center' />
 
       {/*Back Button*/}
       <Link to={"/"}>

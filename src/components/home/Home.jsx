@@ -11,7 +11,7 @@ const Home = () => {
   //onClick event for toggling modal
   const newMessageClicked = async () => {
     const newChatUser = await DataFunctions.getRandomUser()
-    navigate(`../Messages/${newChatUser.username}/${newChatUser.name}`, { replace: true });
+    navigate(`../Messages/${newChatUser.username}/${newChatUser.name}/${newChatUser.avatarId}`, { replace: true });
   };
 
   //Backend call to get All Messages for a user

@@ -107,7 +107,6 @@ export class DataFunctions {
   //used to convert avatarID to name
   static avatarIDToName(avatarID) {
     let avatarName = "";
-
     switch (avatarID) {
       case 0:
         avatarName = "boat";
@@ -145,7 +144,6 @@ export class DataFunctions {
       case 11:
         avatarName = "watermelon";
         break;
-
       default:
         avatarName = "";
         break;
