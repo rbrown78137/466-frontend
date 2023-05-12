@@ -78,7 +78,7 @@ export class DataFunctions {
   static async updateName(name) {
     try {
       const response = await fetch(
-        `${this.url}/api/User/${this.user.id}/${name}`
+        `${this.url}/api/User/updateName/${this.user.id}/${name}`
       );
       const userObj = await response.json();
       console.log(userObj.id);

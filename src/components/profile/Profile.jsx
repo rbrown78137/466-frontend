@@ -49,13 +49,13 @@ const Profile = () => {
 
   //get user data
   const [currentUser, setCurrentUser] = React.useState(exampleUser);
-  useEffect(async () => {
-    if (DataFunctions.getUser()) {
-      setCurrentUser(await DataFunctions.getUser());
-    }
-  }, []);
   var [adj, setAdj] = React.useState(currentUser.name.split(" ")[0]);
   var [noun, setNoun] = React.useState(currentUser.name.split(" ")[1]);
+
+  useEffect(async () => {
+    var loadedUser = await DataFunctions.getUser();
+    setCurrentUser(loadedUser);
+  }, []);
 
   let resetName = (adj, noun) => {
     let newName = adj + " " + noun;
