@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import DataFunctions from "../../DataFunctions";
 import { useState } from "react";
 import NewGlobalMessageModal from "./NewGlobalMessageModal";
@@ -6,7 +7,14 @@ import GlobalMessageBlock from "./GlobalMessageBlock";
 
 const GlobalMessageBoard = () => {
 
-    const [allMessages, setAllMessages] = useState(DataFunctions.getGlobalMessages());
+    const [allMessages, setAllMessages] = useState([]);
+
+    useEffect(async () => {
+        if(DataFunctions.getUser()){
+            setAllMessages(await DataFunctions.getGlobalMessages());
+        }
+    }, []);
+
 
     const [globalMessageModalOn, setGlobalMessageModalOn] = useState(false);
     const newMessageClicked = () => {
@@ -53,7 +61,7 @@ const GlobalMessageBoard = () => {
             {/* Messages List*/}
             <div className="mt-5 overflow-auto px-5">
             {allMessages.map((i) => (
-                <GlobalMessageBlock username={i.username} message={i.message} image={i.avatarId} key={i.key} />
+                <GlobalMessageBlock message={i.text} senderId={i.postAuthorId} key={i.postId} />
             ))}
         </div>
         </div>

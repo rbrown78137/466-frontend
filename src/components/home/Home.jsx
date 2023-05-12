@@ -56,7 +56,7 @@ const Home = () => {
         <div className="mt-5 overflow-auto px-5">
           {messageList.map((i) => (
             <MessageBlock
-              username={i.username}
+              username={i.name}
               firstMessage={""}
               read={false}
               key={i.id}
