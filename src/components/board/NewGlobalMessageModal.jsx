@@ -25,6 +25,7 @@ const NewMessageModal = ({ setSettingOn }) => {
     //If the user clicks out without saving, this is where that action goes
     DataFunctions.sendGlobalMessage(message, DataFunctions.getUser().id);
     setSettingOn(false);
+    window.location.reload();
   };
 
   const updateMessage = (e) => {

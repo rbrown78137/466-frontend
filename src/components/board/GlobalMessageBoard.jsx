@@ -10,9 +10,7 @@ const GlobalMessageBoard = () => {
     const [allMessages, setAllMessages] = useState([]);
 
     useEffect(async () => {
-        if(DataFunctions.getUser()){
-            setAllMessages(await DataFunctions.getGlobalMessages());
-        }
+        setAllMessages(await DataFunctions.getGlobalMessages());
     }, []);
 
 
