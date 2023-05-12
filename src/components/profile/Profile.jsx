@@ -33,7 +33,14 @@ const Profile = () => {
     'Skinny',
     'Stocky',
   ];
-
+  let exampleUser = {
+    id: 0,
+    name: "",
+    password: "",
+    email: "",
+    avatarId: 0,
+    lastLoginTime: "2022-03-02T20:57:01.805Z",
+  };
   const nounList = [
     'Tiger', 'Elephant', 'Giraffe', 'Lion', 'Gorilla', 'Polar Bear', 'Chimpanzee', 'Penguin', 'Kangaroo', 'Dolphin', 'Zebra', 'Crocodile', 'Koala', 'Platypus', 'Bald Eagle', 'Octopus', 'Whale', 'Cheetah', 'Orangutan', 'Panda'
   ];
@@ -41,8 +48,12 @@ const Profile = () => {
 
 
   //get user data
-  const [currentUser, setCurrentUser] = React.useState(DataFunctions.getUser());
-
+  const [currentUser, setCurrentUser] = React.useState(exampleUser);
+  useEffect(async () => {
+    if (DataFunctions.getUser()) {
+      setCurrentUser(await DataFunctions.getUser());
+    }
+  }, []);
   var [adj, setAdj] = React.useState(currentUser.name.split(" ")[0]);
   var [noun, setNoun] = React.useState(currentUser.name.split(" ")[1]);
 
