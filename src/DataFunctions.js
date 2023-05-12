@@ -17,6 +17,18 @@ export class DataFunctions {
     }
   }
 
+  static async getUserFromId(userId) {
+    try {
+      const response = await fetch(`${this.url}/api/User/${userId}`);
+      const userObj = await response.json();
+      if (userObj.id) {
+        return userObj;
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
   //use username and password to call to backend and set user object
   static async loginUser(username, password) {
     try {
