@@ -18,7 +18,6 @@ const Home = () => {
   useEffect(async() => {
     if(DataFunctions.getUser()){
       setMessageList(await DataFunctions.getMessageList())
-      await DataFunctions.setUser(DataFunctions.user);
     }
   });
 
