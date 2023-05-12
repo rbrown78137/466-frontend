@@ -292,37 +292,6 @@ export class DataFunctions {
     }
   }
 
-  //check if the other username searched is in the backend database. If so, return that info
-  static async doesUserExist(otherUsername) {
-    try {
-      const response = await fetch(
-        `${this.url}/api/User/usernameExists/${otherUsername}`
-      );
-      const data = await response.json();
-      if (data) {
-        return data;
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-    return;
-  }
-
-  static async doesUserExist(otherUsername) {
-    try {
-      const response = await fetch(
-        `${this.url}/api/User/usernameExists/${otherUsername}`
-      );
-      const data = await response.json();
-      if (data) {
-        return data;
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-    return;
-  }
-
   static async getOtherUserByName(otherid) {
     try {
       const response = await fetch(
