@@ -249,6 +249,21 @@ export class DataFunctions {
     return;
   }
 
+  static async getRandomUser() {
+    try {
+      const response = await fetch(
+        `${this.url}/api/User/randomUser/`
+      );
+      const data = await response.json();
+      if (data) {
+        return data;
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+    return;
+  }
+
   //get all messages between currentUser and otherUsername
   static async getConversation(otherUsername) {
     try {

@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import DataFunctions from "../../DataFunctions";
 import MessageBlock from "./MessageBlock";
-import NewMessageModal from "./NewMessageModal";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  //Used for modal pop-ups
 
-  //Variables used for pop-ups
-  //SendMessage
-  const [messageModalOn, setMessageModalOn] = useState(false);
+  const navigate = useNavigate();
+
   const [messageList, setMessageList] = useState([]);
   //onClick event for toggling modal
-  const newMessageClicked = () => {
-    setMessageModalOn(true);
+  const newMessageClicked = async () => {
+    const newChatUser = await DataFunctions.getRandomUser()
+    navigate(`../Messages/${newChatUser.username}`, { replace: true });
   };
 
   //Backend call to get All Messages for a user
@@ -27,12 +26,6 @@ const Home = () => {
     <>
       {/*Main Div*/}
       <div className="flex h-screen flex-col pt-5">
-        <div>
-          {/*Only created when settingModalON == true (when the cog is clicked) */}
-          {messageModalOn && (
-            <NewMessageModal setSettingOn={setMessageModalOn} />
-          )}
-        </div>
 
         {/* Header*/}
         <div className=" mx-5 flex justify-between border-b-2">
