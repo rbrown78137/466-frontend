@@ -1,7 +1,7 @@
 export class DataFunctions {
   static user;
-  //static url = "https://466app.azurewebsites.net";
-  static url = "https://localhost:7207";
+  static url = "https://466app.azurewebsites.net";
+  //static url = "https://localhost:7207";
   static mostPopular;
 
   //calls the backend to get user information based on userID
@@ -216,7 +216,7 @@ export class DataFunctions {
   static async getMessageList(userId) {
     try {
       const response = await fetch(
-        `${this.url}/api/Message/usersMessages/${this.user.id}`
+        `${this.url}/api/Message/usersMessaged/${this.user.id}`
       );
       const data = await response.json();
 
