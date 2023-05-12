@@ -297,7 +297,7 @@ export class DataFunctions {
   //global message functions
   static async getGlobalMessages() {
     try {
-      const response = await fetch(`${this.url}/api/Message/globalMessages`);
+      const response = await fetch(`${this.url}/Message/globalMessages`);
       const data = await response.json();
       if (data) {
         return data;
@@ -311,7 +311,7 @@ export class DataFunctions {
   static async sendGlobalMessage(content, userId) {
     try {
       const response = await fetch(
-        `${this.url}/api/Message/globalMessage/${this.user.id}/${content}`
+        `${this.url}/Message/globalMessage/${this.user.id}/${content}`
       );
       const data = await response.json();
     } catch (error) {
