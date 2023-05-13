@@ -51,7 +51,7 @@ const Conversation = () => {
       <img src={avatar.img} alt={avatar.name} className='h-20 w-20 rounded-full self-center' />
 
       {/*Back Button*/}
-      <Link to={"/"}>
+      <Link to={"/Messages"}>
       <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 absolute top-5 left-5 stroke-slate-900 hover:stroke-slate-500 cursor-pointer" fill="none" viewBox="0 0 24 24" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
